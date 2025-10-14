@@ -38,12 +38,12 @@ export function convertMiliseconds(num: number, integer: boolean = true): TimeSt
   if (!biggestModifier) return "0 seconds";
 
 
-  return `${
-    integer 
+  const n = integer 
       ? Math.floor(num / biggestModifier[1]) 
       : num / biggestModifier[1]
-    } ${strings[biggestModifier[0] as keyof typeof strings]!
-          [strings[biggestModifier[0] as keyof typeof strings]!.length - 1]!}` as TimeString
+
+  return `${n} ${strings[biggestModifier[0] as keyof typeof strings]!
+          [strings[biggestModifier[0] as keyof typeof strings]!.length - (Math.abs(n) === 1 || n === 0 ? 2 : 1)]!}` as TimeString
 }
 
 /**
@@ -60,9 +60,10 @@ export function convertMilisecondsWithRemainder(num: number): {
   if (!biggestModifier) return { string: "0 seconds", remainder: 0 };
 
 
-  const string = `${Math.floor(num / biggestModifier[1])} ${
+  const n = Math.floor(num / biggestModifier[1]);
+  const string = `${n} ${
       strings[biggestModifier[0] as keyof typeof strings]!
-        [strings[biggestModifier[0] as keyof typeof strings]!.length - 1]!
+        [strings[biggestModifier[0] as keyof typeof strings]!.length - (Math.abs(n) === 1 || n === 0 ? 2 : 1)]!
     }` as TimeString;
   const remainder = num - Math.floor(num / biggestModifier[1]) * biggestModifier[1]
 
