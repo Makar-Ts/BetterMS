@@ -1,8 +1,8 @@
 import { timeMultipliers } from "../constants/time-multipliers.constant.js";
 import type { TimeModifier, TimeString } from "../interfaces/time-modifiers.types.js";
+import { convertTimeString } from "./utils.js";
 
 const timeStringRegex = new RegExp(/[+-]?\d+(\.\d+)?([eE][+-]?\d+)? ?[a-zA-Z]+/g)
-const modifierRegex = new RegExp(/[a-zA-Z]+/)
 
 
 /**
@@ -12,9 +12,13 @@ const modifierRegex = new RegExp(/[a-zA-Z]+/)
  * 
  * ---
  * 
- * @example toTime("5d 12m 45s")
+ * @example 
+ * toMS("5d 12m 45s")       // 432765000
+ * toMS("55 sec")           // 55000
+ * toMS("1 year 2 months")  // 31557600000
+ * toMS("1 MONTH 12 DAYS")  // 2629800000
  */
-export function toTime(string: string): number {
+export function toMS(string: string): number {
   const timeStrings = Array.from(
     string.matchAll(timeStringRegex)
       ).map(r => r[0] as TimeString);
@@ -23,10 +27,6 @@ export function toTime(string: string): number {
 
 
   return timeStrings.reduce(
-    (acc, v) => {
-      const index = +modifierRegex.exec(v)!.index!;
-
-      return acc + Number(v.slice(0, index)) * (timeMultipliers[v.slice(index) as TimeModifier] || 0);
-    }, 0
+    (acc, v) => acc + convertTimeString(v as TimeString), 0
   )
 }
