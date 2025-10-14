@@ -1,27 +1,52 @@
 {
   "name": "better-ms",
   "version": "0.1.0",
-  "description": "ms but better",
+  "description": "A enhanced, type-safe time conversion library. Convert between milliseconds and human-readable time strings with full TypeScript support.",
+  "keywords": [
+    "time",
+    "ms",
+    "milliseconds",
+    "conversion",
+    "typescript",
+    "duration",
+    "parser",
+    "format",
+    "human-readable"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Makar-Ts/BetterMS.git"
   },
-
-  "main": "dist/index.js",
-  "files": ["dist/**/*"],
-  "type": "module",
-  "scripts": {
-    "build": "tsc",
-    "test": "node dist/test.js"
-  },
-
-  "author": "addlove",
-  "license": "MIT",
+  "homepage": "https://github.com/Makar-Ts/BetterMS#readme",
   "bugs": {
     "url": "https://github.com/Makar-Ts/BetterMS/issues"
   },
-  "homepage": "https://github.com/Makar-Ts/BetterMS",
-
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "node dist/test.js",
+    "prepublishOnly": "npm run build",
+    "clean": "rm -rf dist"
+  },
+  "author": {
+    "name": "Makar Ts",
+    "url": "https://github.com/Makar-Ts"
+  },
+  "license": "MIT",
   "devDependencies": {
     "typescript": "^5.9.3"
   }
