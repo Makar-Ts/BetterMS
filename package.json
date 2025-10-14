@@ -2,6 +2,11 @@
   "name": "better-ms",
   "version": "0.0.1",
   "description": "ms but better",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Makar-Ts/BetterMS.git"
+  },
+
   "main": "dist/index.js",
   "files": ["dist/**/*"],
   "type": "module",
@@ -9,8 +14,14 @@
     "build": "tsc",
     "test": "node dist/test.js"
   },
+
   "author": "addlove",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Makar-Ts/BetterMS/issues"
+  },
+  "homepage": "https://github.com/Makar-Ts/BetterMS",
+
   "devDependencies": {
     "typescript": "^5.9.3"
   }
