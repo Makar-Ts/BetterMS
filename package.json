@@ -1,0 +1,17 @@
+{
+  "name": "better-ms",
+  "version": "0.0.1",
+  "description": "ms but better",
+  "main": "dist/index.js",
+  "files": ["dist/**/*"],
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "test": "node dist/test.js"
+  },
+  "author": "addlove",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
