@@ -14,13 +14,13 @@ A enhanced, type-safe time conversion library for Node.js and browsers. Convert 
 ## Installation
 
 ```bash
-npm install better-ms
+npm install type-better-ms
 ```
 
 ## Quick Start
 
 ```typescript
-import ms from 'better-ms';
+import ms from 'type-better-ms';
 
 // Convert string to milliseconds
 ms('1 day 2 hours 30 minutes'); // → 95400000
@@ -80,7 +80,7 @@ ms(9000000)      // → "2 hours 30 minutes"
 
 ### Direct Function Imports
 ```typescript
-import { toMS, fromMS } from 'better-ms';
+import { toMS, fromMS } from 'type-better-ms';
 
 toMS('2 days 6 hours');    // → 194400000
 fromMS(194400000);         // → "2 days 6 hours"
@@ -88,7 +88,7 @@ fromMS(194400000);         // → "2 days 6 hours"
 
 ### Utility Functions
 ```typescript
-import { convertMiliseconds, convertMilisecondsWithRemainder } from 'better-ms';
+import { convertMiliseconds, convertMilisecondsWithRemainder } from 'type-better-ms';
 
 convertMiliseconds(55000)                    // → "55 seconds"
 convertMiliseconds(55900)                    // → "55 seconds" (rounded)

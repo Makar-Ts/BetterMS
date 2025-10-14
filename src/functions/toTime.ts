@@ -6,7 +6,7 @@ const timeStringRegex = new RegExp(/[+-]?\d+(\.\d+)?([eE][+-]?\d+)? ?[a-zA-Z]+/g
 
 
 /**
- * Convert a better-ms string to number in miliseconds.
+ * Convert a type-better-ms string to number in miliseconds.
  * @param {string} string - multiple separated {@link TimeString}s
  * @returns miliseconds
  * 

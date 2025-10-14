@@ -3,7 +3,7 @@ import { convertMilisecondsWithRemainder } from "./utils.js";
 /**
  * Convert miliseconds to string
  * @param {number} num - miliseconds
- * @returns {string} better-ms string
+ * @returns {string} type-better-ms string
  * 
  * ---
  * 
