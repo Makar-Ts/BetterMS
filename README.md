@@ -105,8 +105,8 @@ BetterMS supports multiple languages. Register custom locales:
 
 ```typescript
 import { registerLocales } from 'type-better-ms';
-import { ENLocale } from 'type-better-ms/locales/en';
-import { RULocale } from 'type-better-ms/locales/ru';
+import { ENLocale } from 'type-better-ms';
+import { RULocale } from 'type-better-ms';
 
 // Register with English as fallback
 registerLocales(RULocale, true);
