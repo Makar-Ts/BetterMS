@@ -1,6 +1,8 @@
 import type { TimeModifier } from "../constants/time-modifiers.enum.js";
 
-
+/**
+ * Interface for type-better-ms localizations
+ */
 export interface Locale {
   /**
    * Convert localized modifier to {@link TimeModifier}

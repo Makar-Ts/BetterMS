@@ -2,6 +2,11 @@ import { fromMS } from "./functions/fromTime.js";
 import { toMS } from "./functions/toTime.js";
 import { convertMiliseconds, convertMilisecondsWithRemainder } from "./functions/utils.js";
 import ms from "./index.js";
+import { ENLocale } from "./locales/langs/en/en.js";
+import { RULocale } from "./locales/langs/ru/ru.js";
+import { registerLocales } from "./locales/register.js";
+
+registerLocales([RULocale, ENLocale]);
 
 console.log('------ ms ------')
 console.log("5d 12m 45s =",      ms("5d 12m 45s"))
