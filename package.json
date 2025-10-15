@@ -1,7 +1,7 @@
 {
   "name": "type-better-ms",
-  "version": "0.1.1",
-  "description": "A enhanced, type-safe time conversion library. Convert between milliseconds and human-readable time strings with full TypeScript support.",
+  "version": "0.2.1",
+  "description": "A enhanced, type-safe time conversion library. Convert between milliseconds and human-readable time strings with full TypeScript support and localization.",
   "keywords": [
     "time",
     "ms",
@@ -11,7 +11,9 @@
     "duration",
     "parser",
     "format",
-    "human-readable"
+    "human-readable",
+    "localization",
+    "time-conversion"
   ],
   "repository": {
     "type": "git",
@@ -29,6 +31,30 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
+    },
+    "./utility/": {
+      "types": "./dist/functions/utils.d.js",
+      "import": "./dist/functions/utils.js"
+    },
+    "./interfaces/": {
+      "types": "./dist/interfaces/locale.interface.d.js",
+      "import": "./dist/interfaces/locale.interface.js"
+    },
+    "./constants/": {
+      "types": "./dist/constants/time-modifiers.enum.d.js",
+      "import": "./dist/constants/time-modifiers.enum.js"
+    },
+    "./locales/": {
+      "types": "./dist/locales/register.d.js",
+      "import": "./dist/locales/register.js"
+    },
+    "./locales/en": {
+      "types": "./dist/locales/langs/en/en.d.ts",
+      "import": "./dist/locales/langs/en/en.js"
+    },
+    "./locales/ru": {
+      "types": "./dist/locales/langs/ru/ru.d.ts",
+      "import": "./dist/locales/langs/ru/ru.js"
     },
     "./package.json": "./package.json"
   },

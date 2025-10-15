@@ -9,6 +9,7 @@ A enhanced, type-safe time conversion library for Node.js and browsers. Convert 
 - 🔄 **Bidirectional**: Convert from milliseconds to strings and vice versa
 - 🎯 **Accurate**: Uses precise time calculations (365.25 days/year, 30.4375 days/month)
 - 📏 **Flexible**: Supports multiple time formats and abbreviations
+- 🌍 **Localizable**: Support for multiple languages and custom locales
 - ⚡ **Modern**: ES Modules, Tree-shakable, and fully typed
 
 ## Installation
@@ -70,7 +71,7 @@ ms('1.5d')                // → 129600000
 
 ### Milliseconds to String
 ```typescript
-ms(39447000000)  // → "1 years 3 months"
+ms(39447000000)  // → "1 year 3 months"
 ms(3666600000)   // → "1 month 1 week 5 days"
 ms(55000)        // → "55 seconds"
 ms(9000000)      // → "2 hours 30 minutes"
@@ -95,7 +96,24 @@ convertMiliseconds(55900)                    // → "55 seconds" (rounded)
 convertMiliseconds(39447000000, false)       // → "1.25 years" (exact)
 
 convertMilisecondsWithRemainder(39447000000) 
-// → { string: "1 years", remainder: 2835000000 }
+// → { string: "1 year", remainder: 2835000000 }
+```
+
+## Localization
+
+BetterMS supports multiple languages. Register custom locales:
+
+```typescript
+import { registerLocales } from 'type-better-ms';
+import { ENLocale } from 'type-better-ms/locales/en';
+import { RULocale } from 'type-better-ms/locales/ru';
+
+// Register with English as fallback
+registerLocales(RULocale, true);
+registerLocales(myLocale, true);
+
+// Register multiple locales
+registerLocales([RULocale, ENLocale]);
 ```
 
 ## Time Calculations
@@ -117,3 +135,7 @@ npm install
 npm run build
 npm run test
 ```
+
+## License
+
+MIT License - see LICENSE file for details.
