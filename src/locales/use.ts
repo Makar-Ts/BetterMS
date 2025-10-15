@@ -11,15 +11,7 @@ export function fromLocale(localized: string): TimeModifier | null {
   for (let locale of LOCALES) {
     try {
       return locale.from(localized);
-    } catch (e: any) {
-      if (e.constructor.name == "LocalizationError") {
-        console.error(e)
-
-        continue;
-      }
-
-      throw e;
-    }
+    } catch (e: any) {}
   }
 
   return null;
@@ -36,15 +28,7 @@ export function toLocale(num: number, mod: TimeModifier): string {
   for (let locale of LOCALES) {
     try {
       return locale.to(num, mod);
-    } catch (e: any) {
-      if (e.constructor.name == "LocalizationError") {
-        console.error(e)
-
-        continue;
-      }
-
-      throw e;
-    }
+    } catch (e: any) {}
   }
 
   return LOCALES[0]?.fallback || "0s";

@@ -1,7 +1,8 @@
+import { TimeModifier } from "../constants/time-modifiers.enum.js";
 import { sortedRawMultipliers, rawMultipliers } from "../constants/time-multipliers.constant.js";
 import { fromLocale, toLocale } from "../locales/use.js";
 
-const unitRegex = new RegExp(/(?<number>([+-]?\d+(\.\d+)?([eE][+-]?\d+)?)) ?(?<mod>[^ ]+)/)
+export const unitRegex = new RegExp(/(?<number>([+-]?\d+(\.\d+)?([eE][+-]?\d+)?)) ?(?<mod>[^ ]+)/)
 
 
 /**
@@ -55,7 +56,7 @@ export function convertMilisecondsWithRemainder(num: number): {
   const biggestModifierIndex = sortedRawMultipliers.findIndex(([k, v]) => num < v) - 1;
   const biggestModifier = sortedRawMultipliers[biggestModifierIndex]!;
 
-  if (!biggestModifier) return { string: "0 seconds", remainder: 0 };
+  if (!biggestModifier) return { string: '0 ' + toLocale(0, TimeModifier.second), remainder: 0 };
 
 
   const n = Math.floor(num / biggestModifier[1]);

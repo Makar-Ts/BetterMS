@@ -18,12 +18,12 @@ export class LocalizationError extends Error {
    * @param {any[]} args - Constructor arguments
    */
   constructor(...args: any) {
-    if (args.localized) {
-      super(`Can not convert ${args.localized} to a TimeModifier.`, {
+    if (typeof args[0] === "string") {
+      super(`Can not convert ${args[0]} to a TimeModifier.`, {
         cause: args.localized
       })
     } else {
-      super(`Can not convert ${args.num} with mod ${args.mod} to a localized string.`, {
+      super(`Can not convert ${args[0]} with mod ${args[1]} to a localized string.`, {
         cause: { num: args.num, mod: args.mod }
       })
     }

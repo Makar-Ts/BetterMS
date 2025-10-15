@@ -1,6 +1,6 @@
-import { convertTimeString } from "./utils.js";
+import { convertTimeString, unitRegex } from "./utils.js";
 
-const timeStringRegex = new RegExp(/[+-]?\d+(\.\d+)?([eE][+-]?\d+)? ?[a-zA-Z]+/g)
+const timeStringRegex = new RegExp(unitRegex, 'g')
 
 
 /**
