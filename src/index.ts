@@ -1,5 +1,11 @@
 import { fromMS } from "./functions/fromTime.js";
 import { toMS } from "./functions/toTime.js";
+export * from "./functions/utils.js";
+export { ENLocale } from "./locales/langs/en/en.js";
+export { RULocale } from "./locales/langs/ru/ru.js";
+export { registerLocales } from "./locales/register.js";
+export * from "./interfaces/locale.interface.js";
+export * from "./constants/time-modifiers.enum.js";
 
 /**
  * Convert a type-better-ms string to number in milliseconds
@@ -37,3 +43,4 @@ function ms(ms: any): any {
 }
 
 export default ms;
+export { fromMS, toMS };
