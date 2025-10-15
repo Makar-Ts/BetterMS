@@ -1,8 +1,6 @@
-import type { TimeModifier } from "../interfaces/time-modifiers.types.js";
-import * as modifiers from "./time-modifiers.constant.js";
-import type { AvailableTimeModifiers } from "./time-modifiers.enum.js";
+import type { TimeModifier } from "./time-modifiers.enum.js";
 
-export const rawMultipliers: Record<AvailableTimeModifiers, number> = {
+export const rawMultipliers: Record<TimeModifier, number> = {
   century:      1000 * 60 * 60 * 24 * 365.25 * 100,
   decade:       1000 * 60 * 60 * 24 * 365.25 * 10,
   year:         1000 * 60 * 60 * 24 * 365.25,
@@ -15,24 +13,6 @@ export const rawMultipliers: Record<AvailableTimeModifiers, number> = {
   millisecond:  1,
 } as const;
 
-export const sortedRawMultipliers: Array<[AvailableTimeModifiers, number]> = 
+export const sortedRawMultipliers: Array<[TimeModifier, number]> = 
   Object.entries(rawMultipliers)
-    .sort(([_a, a], [_b, b]) => a - b) as Array<[AvailableTimeModifiers, number]>;
-
-function createTimeMultipliers() {
-  const result: Record<string, number> = {};
-
-  // Map each modifier group to its multiplier
-  (Object.keys(modifiers) as Array<keyof typeof modifiers>).forEach(key => {
-    const modifierArray = modifiers[key];
-    const multiplier = rawMultipliers[key];
-    
-    modifierArray.forEach(modifier => {
-      result[modifier] = multiplier;
-    });
-  });
-
-  return result as Record<TimeModifier, number>;
-}
-
-export const timeMultipliers = createTimeMultipliers();
+    .sort(([_a, a], [_b, b]) => a - b) as Array<[TimeModifier, number]>;

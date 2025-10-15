@@ -1,27 +1,28 @@
-import { sortedRawMultipliers, timeMultipliers } from "../constants/time-multipliers.constant.js";
-import type { TimeModifier, TimeString } from "../interfaces/time-modifiers.types.js";
-import * as strings from '../constants/time-modifiers.constant.js'
+import { sortedRawMultipliers, rawMultipliers } from "../constants/time-multipliers.constant.js";
+import { fromLocale, toLocale } from "../locales/use.js";
 
-const modifierRegex = new RegExp(/[a-zA-Z]+/)
+const unitRegex = new RegExp(/(?<number>([+-]?\d+(\.\d+)?([eE][+-]?\d+)?)) ?(?<mod>[^ ]+)/)
 
 
 /**
- * Convert {@link TimeString} to miliseconds
- * @param {TimeString} string - TimeString to convert
+ * Convert type-better-ms string to miliseconds
+ * @param {string} string - string to convert
  * @returns miliseconds
  */
-export function convertTimeString(string: TimeString): number {
-  const index = +modifierRegex.exec(string)!.index!;
+export function convertTimeString(string: string): number {
+  const { number, mod } = unitRegex.exec(string)!.groups!;
+  const rmod = fromLocale(mod!);
 
-  return Number(string.slice(0, index)) * 
-          (timeMultipliers[string.slice(index) as TimeModifier] || 0);
+  if (!rmod) return 0;
+
+  return Number(number) * (rawMultipliers[rmod] || 0);
 }
 
 /**
- * Convert miliseconds to a single {@link TimeString}
+ * Convert miliseconds to a single type-better-ms string
  * @param {number} num - miliseconds
  * @param {boolean} [integer=true] - the output timestring will be converted to an integer. Defaults to `true`
- * @returns {TimeString} a single TimeString
+ * @returns {string} a single type-better-ms string
  * 
  * ---
  * 
@@ -31,28 +32,25 @@ export function convertTimeString(string: TimeString): number {
  * convertMiliseconds(39447000000) // 1 years (rounded)
  * convertMiliseconds(39447000000, false) // 1.25 years
  */
-export function convertMiliseconds(num: number, integer: boolean = true): TimeString {
-  const biggestModifierIndex = sortedRawMultipliers.findIndex(([k, v]) => num < v) - 1;
+export function convertMiliseconds(num: number, integer: boolean = true): string {
+  const biggestModifierIndex = sortedRawMultipliers.findIndex(([k, v]) => Math.abs(num) < v) - 1;
   const biggestModifier = sortedRawMultipliers[biggestModifierIndex]!;
-
-  if (!biggestModifier) return "0 seconds";
 
 
   const n = integer 
       ? Math.floor(num / biggestModifier[1]) 
       : num / biggestModifier[1]
 
-  return `${n} ${strings[biggestModifier[0] as keyof typeof strings]!
-          [strings[biggestModifier[0] as keyof typeof strings]!.length - (Math.abs(n) === 1 || n === 0 ? 2 : 1)]!}` as TimeString
+  return `${n} ${toLocale(n, biggestModifier[0])}`
 }
 
 /**
- * Convert miliseconds to a single {@link TimeString} and the remainder of the division
+ * Convert miliseconds to a single string and the remainder of the division
  * @param {number} num - miliseconds
- * @returns {{ string: TimeString, remainder: number }} a TimeString and the remainder
+ * @returns {{ string: string, remainder: number }} a string and the remainder
  */
 export function convertMilisecondsWithRemainder(num: number): { 
-  string: TimeString, remainder: number 
+  string: string, remainder: number 
 } {
   const biggestModifierIndex = sortedRawMultipliers.findIndex(([k, v]) => num < v) - 1;
   const biggestModifier = sortedRawMultipliers[biggestModifierIndex]!;
@@ -61,10 +59,7 @@ export function convertMilisecondsWithRemainder(num: number): {
 
 
   const n = Math.floor(num / biggestModifier[1]);
-  const string = `${n} ${
-      strings[biggestModifier[0] as keyof typeof strings]!
-        [strings[biggestModifier[0] as keyof typeof strings]!.length - (Math.abs(n) === 1 || n === 0 ? 2 : 1)]!
-    }` as TimeString;
+  const string = `${n} ${toLocale(n, biggestModifier[0])}`;
   const remainder = num - Math.floor(num / biggestModifier[1]) * biggestModifier[1]
 
   return { string, remainder };

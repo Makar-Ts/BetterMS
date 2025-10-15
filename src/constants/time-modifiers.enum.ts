@@ -1,4 +1,4 @@
-export enum AvailableTimeModifiers {
+export enum TimeModifier {
   century     = "century",
   decade      = "decade",
   year        = "year",

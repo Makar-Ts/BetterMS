@@ -1,5 +1,3 @@
-import { timeMultipliers } from "../constants/time-multipliers.constant.js";
-import type { TimeModifier, TimeString } from "../interfaces/time-modifiers.types.js";
 import { convertTimeString } from "./utils.js";
 
 const timeStringRegex = new RegExp(/[+-]?\d+(\.\d+)?([eE][+-]?\d+)? ?[a-zA-Z]+/g)
@@ -7,7 +5,7 @@ const timeStringRegex = new RegExp(/[+-]?\d+(\.\d+)?([eE][+-]?\d+)? ?[a-zA-Z]+/g
 
 /**
  * Convert a type-better-ms string to number in miliseconds.
- * @param {string} string - multiple separated {@link TimeString}s
+ * @param {string} string - type-better-ms string
  * @returns miliseconds
  * 
  * ---
@@ -21,12 +19,12 @@ const timeStringRegex = new RegExp(/[+-]?\d+(\.\d+)?([eE][+-]?\d+)? ?[a-zA-Z]+/g
 export function toMS(string: string): number {
   const timeStrings = Array.from(
     string.matchAll(timeStringRegex)
-      ).map(r => r[0] as TimeString);
+      ).map(r => r[0]);
   
   if (timeStrings.length === 0) return 0;
 
 
   return timeStrings.reduce(
-    (acc, v) => acc + convertTimeString(v as TimeString), 0
+    (acc, v) => acc + convertTimeString(v), 0
   )
 }
