@@ -1,6 +1,6 @@
 {
   "name": "type-better-ms",
-  "version": "0.2.2",
+  "version": "0.2.4",
   "description": "A enhanced, type-safe time conversion library. Convert between milliseconds and human-readable time strings with full TypeScript support and localization.",
   "keywords": [
     "time",
